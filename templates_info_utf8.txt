@@ -1,0 +1,94 @@
+Resume Template Library — 40 Design Briefs
+This document defines all 40 resume templates for the builder. Feed this alongside the master build prompt into Antigravity AI so every template is implemented consistently and the template gallery is never ambiguous to users. Each template below must be built as its own React component conforming to the shared ResumeData schema, and must be selectable, previewable, and switchable at any time without any loss of the user's entered content.
+Implementation Rules for Every Template
+Every template component accepts the exact same ResumeData prop shape — never a template-specific data structure.
+Every template must render correctly with zero, some, or all optional sections filled in (no broken layout on empty custom sections, missing photo, etc).
+Every template needs a small thumbnail-safe preview mode (used in the gallery grid) and a full-resolution mode (used in the editor and PDF export) — same component, a `previewScale` or `mode` prop controls sizing only, never content.
+Photo-based templates must gracefully hide the photo slot (and reflow) if the user has not uploaded one — never show a broken image icon.
+Every template ships with a 3-6 color 'accent color' picker (the small colored dots shown under each template in the gallery) that lets the user recolor the template's accent without switching templates.
+Every template must be marked with an `atsFriendly: boolean` flag in the templates table. Photo-heavy, multi-column, and heavily-styled templates (Axis, Galaxy, Quasar, Photon, etc.) are marked false; plain single-column templates (Executive, Hyperion, Lunar, Starburst, Exoplanet, Prism, Corona) are marked true. Show this as a small badge in the gallery so users understand which templates are safe for automated résumé-screening software.
+Every template needs a category tag (Modern, Classic, Creative, Minimal, ATS, Executive, Two-Column, Photo) matching the filter tabs in the gallery, so users are never confused about what a template is 'for'.
+Every template's one-line description (the 'Positioning' text below) must display under its thumbnail in the gallery exactly as written here, so users know at a glance which template fits their situation before they click into it.
+When a user switches templates on an already-completed resume, render a live side-by-side or modal preview of their real data in the candidate template before confirming the switch, so nothing is a surprise.
+
+Template Directory
+Each entry below is a self-contained build brief. Category and Layout define structure; Color System defines the default accent palette (shown as selectable dots in the gallery); Positioning is the exact user-facing description text; Build Brief is the specific instruction for how the component should differ visually from every other template in the set.
+1. Helix
+
+2. Axis
+
+3. Astral
+
+4. Keystone
+
+5. Quantum
+
+6. Horizon
+
+7. Celestial
+
+8. Galaxy
+
+9. Eclipse
+
+10. Classic Europass
+
+11. Modern Clean
+
+12. Professional Sidebar
+
+13. Two-Column Balanced
+
+14. Executive
+
+15. Astrails
+
+16. Orbit
+
+17. Comet
+
+18. Solstice
+
+19. Pulsar
+
+20. Quasar
+
+21. Nebular
+
+22. Nova
+
+23. Aurora
+
+24. Hyperion
+
+25. Lunar
+
+26. Stellar
+
+27. Zenith
+
+28. Aether
+
+29. Nebula
+
+30. Eon
+
+31. Cosmos
+
+32. Starburst
+
+33. Exoplanet
+
+34. Corona
+
+35. Equinox
+
+36. Meridian
+
+37. Vertex
+
+38. Prism
+
+39. Beacon
+
+40. Photon
