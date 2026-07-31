@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { ResumeData } from '@/types/resume';
-import ModernOne from '@/templates/ModernOne';
+import { templateRegistry } from '@/templates/Registry';
 import EditorForm from '@/components/EditorForm';
 
 // Initial empty state matching the schema
@@ -41,6 +41,7 @@ export default function EditorPage() {
   const params = useParams();
   const resumeId = params.id;
   const [data, setData] = useState<ResumeData>(defaultData);
+  const [templateId, setTemplateId] = useState<string>('modern-1');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
@@ -83,9 +84,20 @@ export default function EditorPage() {
       <div className="w-1/2 border-r border-gray-200 bg-white overflow-y-auto flex flex-col relative shadow-lg z-10">
         <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center z-20">
           <h1 className="text-xl font-bold text-gray-800">Resume Editor</h1>
-          <span className={`text-sm ${saving ? 'text-blue-500' : 'text-green-500'}`}>
-            {saving ? 'Saving...' : 'Saved'}
-          </span>
+          <div className="flex items-center gap-4">
+            <select 
+              value={templateId} 
+              onChange={(e) => setTemplateId(e.target.value)}
+              className="text-sm border border-gray-300 rounded p-1"
+            >
+              <option value="modern-1">Modern Clean</option>
+              <option value="classic-1">Classic Professional</option>
+              <option value="creative-1">Creative Split</option>
+            </select>
+            <span className={`text-sm ${saving ? 'text-blue-500' : 'text-green-500'}`}>
+              {saving ? 'Saving...' : 'Saved'}
+            </span>
+          </div>
         </div>
         <div className="p-6">
           <EditorForm data={data} onChange={setData} />
@@ -95,8 +107,10 @@ export default function EditorPage() {
       {/* Right Panel: Live Preview */}
       <div className="w-1/2 bg-gray-200 overflow-y-auto flex justify-center p-8">
         <div className="w-[816px] h-[1056px] shadow-2xl bg-white origin-top shrink-0" style={{ transform: 'scale(0.8)' }}>
-          {/* We will implement template switching later. Hardcoding ModernOne for now */}
-          <ModernOne data={data} />
+          {(() => {
+            const TemplateComponent = templateRegistry[templateId] || templateRegistry['modern-1'];
+            return <TemplateComponent data={data} />;
+          })()}
         </div>
       </div>
     </div>
