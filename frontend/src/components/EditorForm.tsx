@@ -19,7 +19,7 @@ export default function EditorForm({ data, onChange }: Props) {
     });
   };
 
-  const updateExperience = (index: number, field: keyof Experience, value: any) => {
+  const updateExperience = (index: number, field: keyof Experience, value: string | boolean | string[]) => {
     const newExp = [...data.experience];
     newExp[index] = { ...newExp[index], [field]: value };
     onChange({ ...data, experience: newExp });
@@ -35,7 +35,7 @@ export default function EditorForm({ data, onChange }: Props) {
     });
   };
 
-  const updateEducation = (index: number, field: keyof Education, value: any) => {
+  const updateEducation = (index: number, field: keyof Education, value: string) => {
     const newEdu = [...data.education];
     newEdu[index] = { ...newEdu[index], [field]: value };
     onChange({ ...data, education: newEdu });

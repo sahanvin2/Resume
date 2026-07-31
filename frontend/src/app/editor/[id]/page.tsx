@@ -42,21 +42,10 @@ export default function EditorPage() {
   const resumeId = params.id;
   const [data, setData] = useState<ResumeData>(defaultData);
   const [templateId, setTemplateId] = useState<string>('modern-1');
-  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-
-  // Fetch initial data
-  useEffect(() => {
-    // In a real implementation, fetch from backend:
-    // fetch(`/api/resumes/${resumeId}`).then(res => res.json()).then(json => { setData(json.data); setLoading(false); });
-    
-    // For now, just set loading false to show the editor immediately
-    setLoading(false);
-  }, [resumeId]);
 
   // Debounced auto-save effect
   useEffect(() => {
-    if (loading) return;
     
     const handler = setTimeout(() => {
       setSaving(true);
@@ -74,9 +63,9 @@ export default function EditorPage() {
     }, 1000);
 
     return () => clearTimeout(handler);
-  }, [data, loading, resumeId]);
+  }, [data, resumeId]);
 
-  if (loading) return <div className="p-8">Loading...</div>;
+
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">

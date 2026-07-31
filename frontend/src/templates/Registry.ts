@@ -1,8 +1,9 @@
 import ModernOne from './ModernOne';
 import ClassicOne from './ClassicOne';
 import CreativeOne from './CreativeOne';
+import { ResumeData } from '@/types/resume';
 
-export const templateRegistry: Record<string, React.ComponentType<any>> = {
+export const templateRegistry: Record<string, React.ComponentType<{ data: ResumeData }>> = {
   'modern-1': ModernOne,
   'classic-1': ClassicOne,
   'creative-1': CreativeOne,
